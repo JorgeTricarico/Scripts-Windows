@@ -1,60 +1,46 @@
 import os
 import sys
 from git import Repo
+from git.exc import GitCommandError
 from urllib.parse import urlparse
-import subprocess
 
-def command_exists(command):
-    return subprocess.call(["where", command], stdout=subprocess.PIPE, stderr=subprocess.PIPE) == 0
 
-def get_username_and_repo_from_url(url):
+def obtener_nombre_usuario_y_repositorio_desde_url(url):
+    # Parsear la URL para obtener el nombre de usuario y el nombre del repositorio
     parsed_url = urlparse(url)
     path_parts = parsed_url.path.strip('/').split('/')
 
-    if not path_parts:
-        raise ValueError("URL no válida")
-
     if len(path_parts) >= 2:
-        username = path_parts[0]
-        repo_name = path_parts[1].split('/')[0]
-        return username, repo_name
+        usuario = path_parts[0]
+        # Obtener el nombre del repositorio sin extensiones u otras partes
+        nombre_repositorio = path_parts[-1].split('/')[-1]
+        return usuario, nombre_repositorio
     else:
         return None, None
 
-def clone_and_open_repo(url):
-    username, repo_name = get_username_and_repo_from_url(url)
+
+def clonar_repositorio(url):
+    # Obtener el nombre de usuario y el nombre del repositorio desde la URL
+    username, repo_name = obtener_nombre_usuario_y_repositorio_desde_url(url)
 
     if username and repo_name:
-        repo_dir = os.path.join(os.getcwd(), repo_name)
-        try:
-            Repo.clone_from(f"https://github.com/{username}/{repo_name}", f"{username}/{repo_name}")
-        except PermissionError as e:
-            print(f"Error de permisos al clonar: {e}")
-            return
-        print(f"Repositorio clonado en: {repo_dir}")
-        
-        idea_command = 'start idea'
-        if not command_exists(idea_command):
-            print(f"El comando '{idea_command}' no se encuentra. Instala IntelliJ IDEA o configura la ruta correctamente.")
-            return
+        ruta_carpeta_destino = os.path.join(os.getcwd(), repo_name)
 
-        idea_start_repo = f"{idea_command} .\\{username}\\{repo_name} \\"
         try:
-            subprocess.run( idea_start_repo, shell=True)
-        except FileNotFoundError as e:
-            print(f"Error al abrir proyecto: Archivo no encontrado ({e})")
-        except subprocess.CalledProcessError as e:
-            print(f"Error al abrir proyecto: {e}")
-        print(f"Proyecto abierto en IDEA en: {username}/{repo_name}")
+            # Clonar el repositorio en la carpeta de destino
+            Repo.clone_from(f"https://github.com/{username}/{repo_name}", f"{username}/{repo_name}")
+            print(f"Repositorio clonado en: {os.path.abspath(ruta_carpeta_destino)}")
+        except GitCommandError as e:
+            print(f"Error al clonar el repositorio: {e}")
+    else:
+        print("No se pudo obtener el nombre de usuario y el nombre del repositorio desde la URL.")
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Uso: python script.py <URL_del_repositorio> [ruta_a_IDEA]")
+        print("Uso: python script.py <URL_del_repositorio>")
         sys.exit(1)
 
-    url_repo = sys.argv[1]
+    url_repositorio = sys.argv[1]
 
-    try:
-        clone_and_open_repo(url_repo)
-    except ValueError as e:
-        print(f"Error: {e}")
+    clonar_repositorio(url_repositorio)
