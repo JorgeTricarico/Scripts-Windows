@@ -25,9 +25,14 @@ Usuario/
 ```
 ___
 
+## Clonar con clone_vsc.py alias clone_vsc
+
+Este script hace lo mismo que clone.py solo que luego abre el proyecto en VS.
+___
+
 ## Clonar con clone_idea.py alias clone_idea
 
-Este script hace lo mismo que clone.py solo que luego abre el proyecto en Intellij, esta pensado principalmente para clonar y abrir proyectos de Java rapidamente
+Este script hace lo mismo que clone.py solo que luego abre el proyecto en Intellij, esta pensado principalmente para clonar y abrir proyectos de Java rapidamente.
 
 ___
 
