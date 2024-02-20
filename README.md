@@ -94,3 +94,22 @@ Agregar la ruta de acceso en Windows a la carpeta que contiene sus scripts a la 
 
 - C:\Scripts\
 
+# Configuraciones extras que podrías necesitar
+
+## Verificar asociación de archivos:
+
+1. Abre el Explorador de archivos y encuentra un archivo .py.
+2. Haz clic derecho en el archivo y selecciona "Abrir con" y luego "Elegir otra aplicación".
+3. Selecciona el intérprete de Python adecuado o elige un programa diferente para abrir archivos .py y asegúrate de marcar la opción "Usar siempre esta aplicación para abrir archivos .py".
+
+## Verificar la variable de entorno PATHEXT:
+
+- Verifica que la variable de entorno PATHEXT incluya .PY. Puedes hacer esto ejecutando echo %PATHEXT% en la consola de Windows y asegurándote de que .PY esté presente en la lista.
+
+## Asociación de archivos en PowerShell:
+
+1. Abre PowerShell y verifica la asociación de archivos para Python ejecutando el siguiente comando:
+```powershell
+Get-Command python | Format-List
+```
+2. Asegúrate de que el Path que se muestra esté apuntando al intérprete de Python correcto.
