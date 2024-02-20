@@ -27,7 +27,7 @@ ___
 
 ## Clonar con clone_vsc.py alias clone_vsc
 
-Este script hace lo mismo que clone.py solo que luego abre el proyecto en VS.
+Este script hace lo mismo que clone.py solo que luego abre el proyecto en VSC.
 ___
 
 ## Clonar con clone_idea.py alias clone_idea
