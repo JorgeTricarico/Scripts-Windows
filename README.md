@@ -46,3 +46,46 @@ Remove JorgeTricarico
 ```
 Carpeta JorgeTricarico eliminada con éxito.
 ```
+***
+
+## Agregar un Alias en PowerShell
+Crea un alias para un script en PowerShell, permitiendo ejecutarlo con un nombre más corto y fácil de recordar.        
+
+**Pasos**
+1. Abra la consola de PowerShell.
+
+2. Escriba el siguiente comando para crear un alias:
+```
+Set-Alias <NombreAlias> <RutaScript.py>
+```
+
+**Ejemplo**
+```
+Set-Alias clone C:\Scripts\clone.py
+```
+
+***
+
+## Agregar el Path a la Variable de Entorno
+Agregar la ruta de acceso en Windows a la carpeta que contiene sus scripts a la variable de entorno Path para que pueda ejecutarlos sin escribir la ruta completa.
+
+**Pasos:**
+
+1. Abra el Panel de control de Windows.
+
+2. Seleccione "Sistema".
+
+3. Haga clic en "Configuración avanzada del sistema".
+
+4. En la pestaña "Avanzadas", haga clic en "Variables de entorno".
+
+5. En la sección "Variables del sistema", busque la variable Path.
+
+6. Haga clic en "Editar".
+
+7. Al final del valor de la variable, agregue un punto y coma (;) seguido de la ruta completa a la carpeta que contiene sus scripts.
+
+**Ejemplo:**
+
+- C:\Scripts\
+
